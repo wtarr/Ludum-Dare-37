@@ -51,7 +51,7 @@ tracks/0/keys = { "times":FloatArray( 0, 4 ), "transitions":FloatArray( 1, 1 ), 
 
 [node name="rotating_cog" type="KinematicBody2D"]
 
-transform/rot = 188.781
+transform/rot = 8.88167
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
