@@ -11,6 +11,3 @@ func _ready():
 
 func _on_Area2D_body_enter_pendulum( body ):
 	print(body.get_name())
-
-func _on_Area2D_body_enter_barrel( body ):
-	print("barrel " + body.get_name())

@@ -48,7 +48,6 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_kinematic"]
 
 transform/pos = Vector2( 0.0626717, 1.62948 )
-transform/scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0

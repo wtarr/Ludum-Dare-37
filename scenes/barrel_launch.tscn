@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scripts/barrel_launcher.gd" type="Script" id=1]
+[ext_resource path="res://assets/launcher.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+
+resource/name = "launch"
+length = 1.5
+loop = true
+step = 0.1
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "values":[ { "args":[  ], "method":"launch" } ] }
+
+[node name="barrel_launch" type="Position2D"]
+
+script/script = ExtResource( 1 )
+scale = 1
+angular_velocity = 100
+linear_velocity = Vector2( 50, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0.0105224, -0.00493336 )
+texture = ExtResource( 2 )
+offset = Vector2( 9.17233, 0.0341997 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/launch = SubResource( 1 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "launch"
+
+

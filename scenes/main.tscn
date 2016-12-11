@@ -1,14 +1,14 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
-[ext_resource path="res://assets/background.png" type="Texture" id=2]
+[ext_resource path="res://scenes/ParallaxBackground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/tiles.tres" type="TileSet" id=3]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/pendulum_v2.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/barrel.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/rotating_cog_cw.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/tile_1.png" type="Texture" id=8]
-[ext_resource path="res://scenes/rotating_cog.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/rotating_cog_cw.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/tile_1.png" type="Texture" id=7]
+[ext_resource path="res://scenes/rotating_cog.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/barrel_launch.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -25,7 +25,19 @@ tracks/0/type = "value"
 tracks/0/path = NodePath(".:transform/pos")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 2, 4 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ Vector2( 921, 456 ), Vector2( 921, 296 ), Vector2( 921, 456 ) ] }
+tracks/0/keys = { "times":FloatArray( 0, 2, 4 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ Vector2( 888, 1544 ), Vector2( 888, 1336 ), Vector2( 888, 1544 ) ] }
+
+[sub_resource type="Animation" id=5]
+
+resource/name = "lift"
+length = 4.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 2, 4 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ Vector2( 40, 216 ), Vector2( 40, 56 ), Vector2( 40, 216 ) ] }
 
 [sub_resource type="RectangleShape2D" id=3]
 
@@ -44,16 +56,11 @@ tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = { "times":FloatArray( 0, 2, 4 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ Vector2( 280, 216 ), Vector2( 156, 216 ), Vector2( 280, 216 ) ] }
 
-[node name="Node2D" type="Node2D"]
+[node name="Root" type="Node2D"]
 
 script/script = ExtResource( 1 )
 
-[node name="background" type="Sprite" parent="."]
-
-transform/pos = Vector2( 563.835, 241.848 )
-transform/scale = Vector2( 1.54396, 1.54396 )
-texture = ExtResource( 2 )
-__meta__ = { "_edit_lock_":true }
+[node name="ParallaxBackground" parent="." instance=ExtResource( 2 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 
@@ -71,26 +78,19 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( 0, 0, 63, 0, 65536, 0, 65599, 0, 131072, 0, 131135, 0, 196608, 0, 196671, 0, 262144, 0, 262207, 0, 327680, 0, 327743, 0, 393216, 0, 393279, 0, 458752, 0, 458815, 0, 524288, 0, 524351, 0, 589824, 0, 589887, 0, 655360, 0, 655423, 0, 720896, 0, 720959, 0, 786432, 0, 786495, 0, 851968, 0, 851974, 0, 851975, 0, 851976, 0, 851989, 0, 851990, 0, 851991, 0, 851992, 0, 851993, 0, 851994, 0, 851995, 0, 851996, 0, 851997, 0, 851998, 0, 851999, 0, 852000, 0, 852031, 0, 917504, 0, 917567, 0, 983040, 0, 983103, 0, 1048576, 0, 1048639, 0, 1114112, 0, 1114175, 0, 1179648, 0, 1179700, 0, 1179701, 0, 1179702, 0, 1179703, 0, 1179704, 0, 1179711, 0, 1245184, 0, 1245247, 0, 1310720, 0, 1310783, 0, 1376256, 0, 1376319, 0, 1441792, 0, 1441855, 0, 1507328, 0, 1507391, 0, 1572864, 0, 1572927, 0, 1638400, 0, 1638463, 0, 1703936, 0, 1703999, 0, 1769472, 0, 1769535, 0, 1835008, 0, 1835033, 0, 1835034, 0, 1835035, 0, 1835036, 0, 1835037, 0, 1835060, 0, 1835061, 0, 1835062, 0, 1835063, 0, 1835064, 0, 1835071, 0, 1900544, 0, 1900590, 0, 1900591, 0, 1900592, 0, 1900593, 0, 1900594, 0, 1900595, 0, 1900596, 0, 1900600, 0, 1900601, 1, 1900602, 1, 1900603, 1, 1900604, 1, 1900605, 1, 1900606, 1, 1900607, 0, 1966080, 0, 1966126, 0, 1966136, 0, 1966137, 0, 1966138, 0, 1966139, 0, 1966140, 0, 1966141, 0, 1966142, 0, 1966143, 0, 2031616, 0, 2031636, 0, 2031637, 0, 2031638, 0, 2031639, 0, 2031659, 0, 2031660, 0, 2031661, 0, 2031662, 0, 2031679, 0, 2097152, 0, 2097195, 0, 2097215, 0, 2162688, 0, 2162731, 0, 2162751, 0, 2228224, 0, 2228239, 0, 2228240, 0, 2228241, 0, 2228242, 0, 2228267, 0, 2228287, 0, 2293760, 0, 2293775, 0, 2293778, 0, 2293803, 0, 2293823, 0, 2359296, 0, 2359311, 0, 2359314, 0, 2359315, 1, 2359316, 1, 2359317, 1, 2359318, 1, 2359319, 1, 2359320, 1, 2359321, 1, 2359322, 1, 2359323, 1, 2359324, 1, 2359325, 1, 2359326, 1, 2359327, 1, 2359328, 1, 2359329, 1, 2359330, 1, 2359331, 1, 2359332, 1, 2359333, 1, 2359334, 1, 2359335, 1, 2359336, 1, 2359337, 1, 2359338, 1, 2359339, 0, 2359359, 0, 2424832, 0, 2424833, 0, 2424834, 0, 2424835, 0, 2424836, 0, 2424837, 0, 2424838, 0, 2424839, 0, 2424840, 0, 2424841, 0, 2424842, 0, 2424843, 0, 2424844, 0, 2424845, 0, 2424846, 0, 2424847, 0, 2424850, 0, 2424851, 0, 2424852, 0, 2424853, 0, 2424854, 0, 2424855, 0, 2424856, 0, 2424857, 0, 2424858, 0, 2424859, 0, 2424860, 0, 2424861, 0, 2424862, 0, 2424863, 0, 2424864, 0, 2424865, 0, 2424866, 0, 2424867, 0, 2424868, 0, 2424869, 0, 2424870, 0, 2424871, 0, 2424872, 0, 2424873, 0, 2424874, 0, 2424875, 0, 2424876, 0, 2424877, 0, 2424878, 0, 2424879, 0, 2424880, 0, 2424881, 0, 2424882, 0, 2424883, 0, 2424884, 0, 2424885, 0, 2424886, 0, 2424887, 0, 2424888, 0, 2424889, 0, 2424890, 0, 2424891, 0, 2424892, 0, 2424893, 0, 2424894, 0, 2424895, 0 )
+tile_data = IntArray( 0, 0, 63, 0, 65536, 0, 65599, 0, 131072, 0, 131135, 0, 196608, 0, 196666, 0, 196667, 0, 196668, 0, 196669, 0, 196670, 0, 196671, 0, 262144, 0, 262207, 0, 327680, 0, 327743, 0, 393216, 0, 393279, 0, 458752, 0, 458815, 0, 524288, 0, 524351, 0, 589824, 0, 589887, 0, 655360, 0, 655423, 0, 720896, 0, 720959, 0, 786432, 0, 786495, 0, 851968, 0, 851974, 0, 851975, 0, 851976, 0, 851989, 0, 851990, 0, 851991, 0, 851992, 0, 851993, 0, 851994, 0, 851995, 0, 851996, 0, 851997, 0, 851998, 0, 851999, 0, 852000, 0, 852031, 0, 917504, 0, 917567, 0, 983040, 0, 983103, 0, 1048576, 0, 1048639, 0, 1114112, 0, 1114175, 0, 1179648, 0, 1179700, 0, 1179701, 0, 1179702, 0, 1179703, 0, 1179704, 0, 1179711, 0, 1245184, 0, 1245247, 0, 1310720, 0, 1310783, 0, 1376256, 0, 1376319, 0, 1441792, 0, 1441855, 0, 1507328, 0, 1507391, 0, 1572864, 0, 1572927, 0, 1638400, 0, 1638463, 0, 1703936, 0, 1703999, 0, 1769472, 0, 1769535, 0, 1835008, 0, 1835033, 0, 1835034, 0, 1835035, 0, 1835036, 0, 1835037, 0, 1835060, 0, 1835061, 0, 1835062, 0, 1835063, 0, 1835064, 0, 1835071, 0, 1900544, 0, 1900590, 0, 1900591, 0, 1900592, 0, 1900593, 0, 1900594, 0, 1900595, 0, 1900596, 0, 1900600, 0, 1900601, 1, 1900602, 1, 1900603, 1, 1900604, 1, 1900605, 1, 1900606, 1, 1900607, 0, 1966080, 0, 1966126, 0, 1966136, 0, 1966137, 0, 1966138, 0, 1966139, 0, 1966140, 0, 1966141, 0, 1966142, 0, 1966143, 0, 2031616, 0, 2031636, 0, 2031637, 0, 2031638, 0, 2031639, 0, 2031659, 0, 2031660, 0, 2031661, 0, 2031662, 0, 2031679, 0, 2097152, 0, 2097195, 0, 2097215, 0, 2162688, 0, 2162731, 0, 2162751, 0, 2228224, 0, 2228239, 0, 2228240, 0, 2228241, 0, 2228242, 0, 2228267, 0, 2228287, 0, 2293760, 0, 2293775, 0, 2293778, 0, 2293803, 0, 2293823, 0, 2359296, 0, 2359311, 0, 2359314, 0, 2359315, 1, 2359316, 1, 2359317, 1, 2359318, 1, 2359319, 1, 2359320, 1, 2359321, 1, 2359322, 1, 2359323, 1, 2359324, 1, 2359325, 1, 2359326, 1, 2359327, 1, 2359328, 1, 2359329, 1, 2359330, 1, 2359331, 1, 2359332, 1, 2359333, 1, 2359334, 1, 2359335, 1, 2359336, 1, 2359337, 1, 2359338, 1, 2359339, 0, 2359359, 0, 2424832, 0, 2424847, 0, 2424850, 0, 2424851, 0, 2424852, 0, 2424853, 0, 2424854, 0, 2424855, 0, 2424856, 0, 2424857, 0, 2424858, 0, 2424859, 0, 2424860, 0, 2424861, 0, 2424862, 0, 2424863, 0, 2424864, 0, 2424865, 0, 2424866, 0, 2424867, 0, 2424868, 0, 2424869, 0, 2424870, 0, 2424871, 0, 2424872, 0, 2424873, 0, 2424874, 0, 2424875, 0, 2424895, 0, 2490368, 0, 2490431, 0, 2555904, 0, 2555967, 0, 2621440, 0, 2621503, 0, 2686976, 0, 2687039, 0, 2752512, 0, 2752575, 0, 2818048, 0, 2818111, 0, 2883584, 0, 2883647, 0, 2949120, 0, 2949183, 0, 3014656, 0, 3014719, 0, 3080192, 0, 3080255, 0, 3145728, 0, 3145791, 0, 3211264, 0, 3211327, 0, 3276800, 0, 3276863, 0, 3342336, 0, 3342399, 0, 3407872, 0, 3407935, 0, 3473408, 0, 3473471, 0, 3538944, 0, 3538951, 0, 3538952, 0, 3538953, 0, 3538954, 0, 3538955, 0, 3538956, 0, 3538957, 0, 3538958, 0, 3538959, 0, 3538960, 0, 3538961, 0, 3538962, 0, 3538963, 0, 3538964, 0, 3538965, 0, 3538966, 0, 3538967, 0, 3538968, 0, 3538969, 0, 3538970, 0, 3538971, 0, 3538972, 0, 3538973, 0, 3538974, 0, 3538975, 0, 3538976, 0, 3538977, 0, 3538978, 0, 3538979, 0, 3538980, 0, 3538981, 0, 3538982, 0, 3538983, 0, 3538984, 0, 3538985, 0, 3538986, 0, 3538987, 0, 3538988, 0, 3538989, 0, 3538990, 0, 3538991, 0, 3538992, 0, 3538993, 0, 3539007, 0, 3604480, 0, 3604543, 0, 3670016, 0, 3670079, 0, 3735552, 0, 3735615, 0, 3801088, 0, 3801151, 0, 3866624, 0, 3866687, 0, 3932160, 0, 3932223, 0, 3997696, 0, 3997759, 0, 4063232, 0, 4063295, 0, 4128768, 0, 4128831, 0, 4194304, 0, 4194367, 0, 4259840, 0, 4259903, 0, 4325376, 0, 4325439, 0, 4390912, 0, 4390975, 0, 4456448, 0, 4456511, 0, 4521984, 0, 4522047, 0, 4587520, 0, 4587527, 0, 4587528, 0, 4587529, 0, 4587530, 0, 4587531, 0, 4587532, 0, 4587533, 0, 4587534, 0, 4587535, 0, 4587536, 0, 4587537, 0, 4587538, 0, 4587539, 0, 4587540, 0, 4587541, 0, 4587542, 0, 4587543, 0, 4587544, 0, 4587545, 0, 4587546, 0, 4587547, 0, 4587548, 0, 4587549, 0, 4587550, 0, 4587551, 0, 4587552, 0, 4587553, 0, 4587554, 0, 4587555, 0, 4587556, 0, 4587557, 0, 4587558, 0, 4587559, 0, 4587560, 0, 4587561, 0, 4587562, 0, 4587563, 0, 4587564, 0, 4587565, 0, 4587566, 0, 4587567, 0, 4587568, 0, 4587569, 0, 4587570, 0, 4587571, 0, 4587572, 0, 4587573, 0, 4587583, 0, 4653056, 0, 4653119, 0, 4718592, 0, 4718655, 0, 4784128, 0, 4784191, 0, 4849664, 0, 4849727, 0, 4915200, 0, 4915263, 0, 4980736, 0, 4980799, 0, 5046272, 0, 5046335, 0, 5111808, 0, 5111871, 0, 5177344, 0, 5177407, 0, 5242880, 0, 5242943, 0, 5308416, 0, 5308479, 0, 5373952, 0, 5374015, 0, 5439488, 0, 5439490, 0, 5439491, 0, 5439492, 0, 5439493, 0, 5439495, 0, 5439496, 0, 5439497, 0, 5439498, 0, 5439499, 0, 5439500, 0, 5439501, 0, 5439502, 0, 5439503, 0, 5439504, 0, 5439505, 0, 5439506, 0, 5439507, 0, 5439508, 0, 5439509, 0, 5439510, 0, 5439511, 0, 5439512, 0, 5439513, 0, 5439514, 0, 5439515, 0, 5439516, 0, 5439517, 0, 5439518, 0, 5439519, 0, 5439520, 0, 5439521, 0, 5439522, 0, 5439523, 0, 5439524, 0, 5439525, 0, 5439526, 0, 5439527, 0, 5439528, 0, 5439529, 0, 5439530, 0, 5439531, 0, 5439532, 0, 5439533, 0, 5439534, 0, 5439535, 0, 5439536, 0, 5439537, 0, 5439538, 0, 5439539, 0, 5439540, 0, 5439541, 0, 5439551, 0, 5505024, 0, 5505087, 0, 5570560, 0, 5570623, 0, 5636096, 0, 5636159, 0, 5701632, 0, 5701695, 0, 5767168, 0, 5767231, 0, 5832704, 0, 5832767, 0, 5898240, 0, 5898303, 0, 5963776, 0, 5963839, 0, 6029312, 0, 6029375, 0, 6094848, 0, 6094911, 0, 6160384, 0, 6160447, 0, 6225920, 0, 6225983, 0, 6291456, 0, 6291457, 0, 6291458, 0, 6291459, 0, 6291460, 0, 6291461, 0, 6291462, 0, 6291463, 0, 6291464, 0, 6291465, 0, 6291466, 0, 6291467, 0, 6291468, 0, 6291469, 0, 6291470, 0, 6291471, 0, 6291472, 0, 6291473, 0, 6291474, 0, 6291475, 0, 6291476, 0, 6291477, 0, 6291478, 0, 6291479, 0, 6291480, 0, 6291481, 0, 6291482, 0, 6291483, 0, 6291484, 0, 6291485, 0, 6291486, 0, 6291487, 0, 6291488, 0, 6291489, 0, 6291490, 0, 6291491, 0, 6291492, 0, 6291493, 0, 6291494, 0, 6291495, 0, 6291496, 0, 6291497, 0, 6291498, 0, 6291499, 0, 6291500, 0, 6291501, 0, 6291502, 0, 6291503, 0, 6291504, 0, 6291505, 0, 6291506, 0, 6291507, 0, 6291508, 0, 6291509, 0, 6291510, 0, 6291519, 0, 6357046, 0, 6357047, 1, 6357048, 1, 6357049, 1, 6357050, 1, 6357051, 1, 6357052, 1, 6357053, 1, 6357054, 1, 6357055, 0, 6422582, 0, 6422583, 0, 6422584, 0, 6422585, 0, 6422586, 0, 6422587, 0, 6422588, 0, 6422589, 0, 6422590, 0, 6422591, 0 )
 __meta__ = { "_edit_lock_":true }
 
 [node name="player" parent="." instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 45.7212, 569.686 )
+editor/display_folded = true
+transform/pos = Vector2( 47.6378, 1520.17 )
 
 [node name="pendulum_v2_a" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 371.661, 321.34 )
 
-[node name="barrel" parent="." instance=ExtResource( 6 )]
-
-transform/pos = Vector2( 634.928, 477.624 )
-velocity/linear = Vector2( -100, 0 )
-velocity/angular = 25.0
-damp_override/linear = -1.0
-damp_override/angular = -1.0
-
-[node name="rotating_cog_cw" parent="." instance=ExtResource( 7 )]
+[node name="rotating_cog_cw" parent="." instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 570.996, 430.787 )
 transform/scale = Vector2( 0.5, 0.5 )
@@ -105,30 +105,30 @@ shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
+__meta__ = { "_edit_lock_":true }
 
 [node name="Sprite" type="Sprite" parent="elevator_a"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="Sprite 2" type="Sprite" parent="elevator_a"]
 
 transform/pos = Vector2( 16, 0 )
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="Sprite 3" type="Sprite" parent="elevator_a"]
 
 transform/pos = Vector2( 32, 0 )
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="Sprite 4" type="Sprite" parent="elevator_a"]
 
 transform/pos = Vector2( 48, 0 )
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="elevator_a"]
 
 transform/pos = Vector2( 24.075, -0.104677 )
-transform/scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
@@ -146,7 +146,7 @@ autoplay = "lift"
 
 [node name="elevator_a1" type="KinematicBody2D" parent="."]
 
-transform/pos = Vector2( 921, 296 )
+transform/pos = Vector2( 888, 1544 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 24.075, -0.104677 )
@@ -157,27 +157,26 @@ collision/margin = 0.08
 
 [node name="Sprite" type="Sprite" parent="elevator_a1"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="Sprite 2" type="Sprite" parent="elevator_a1"]
 
 transform/pos = Vector2( 16, 0 )
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="Sprite 3" type="Sprite" parent="elevator_a1"]
 
 transform/pos = Vector2( 32, 0 )
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="Sprite 4" type="Sprite" parent="elevator_a1"]
 
 transform/pos = Vector2( 48, 0 )
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="elevator_a1"]
 
 transform/pos = Vector2( 24.075, -0.104677 )
-transform/scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
@@ -187,13 +186,13 @@ _update_shape_index = 0
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/lift = SubResource( 2 )
+anims/lift = SubResource( 5 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = "lift"
 
-[node name="rotating_cog" parent="." instance=ExtResource( 9 )]
+[node name="rotating_cog" parent="." instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 691.456, 242.177 )
 
@@ -204,6 +203,7 @@ transform/pos = Vector2( 418.312, 90.224 )
 
 [node name="h_elevator" type="KinematicBody2D" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 181.917, 216 )
 input/pickable = false
 shapes/0/shape = SubResource( 3 )
@@ -215,22 +215,22 @@ collision/margin = 0.08
 
 [node name="Sprite" type="Sprite" parent="h_elevator"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="Sprite1" type="Sprite" parent="h_elevator"]
 
 transform/pos = Vector2( 16, 0 )
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="Sprite2" type="Sprite" parent="h_elevator"]
 
 transform/pos = Vector2( 32, 0 )
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="Sprite3" type="Sprite" parent="h_elevator"]
 
 transform/pos = Vector2( 48, 0 )
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="h_elevator"]
 
@@ -252,8 +252,33 @@ autoplay = "slide"
 
 [node name="spikes" type="Sprite" parent="."]
 
-[connection signal="body_enter" from="barrel/Area2D" to="." method="_on_Area2D_body_enter_barrel"]
+[node name="barrel_launch_a" parent="." instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 280, 1420 )
+linear_velocity = Vector2( -50, 0 )
+
+[node name="barrel_launch_b" parent="." instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 680, 1418.89 )
+angular_velocity = -100
+linear_velocity = Vector2( -50, 0 )
+
+[node name="barrel_launch_1_c" parent="." instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 280, 1184.04 )
+scale = -1
+
+[node name="barrel_launch_1_b" parent="." instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 480, 1185.55 )
+scale = -1
+angular_velocity = -100
+
+[node name="barrel_launch_1_a" parent="." instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 680, 1179.92 )
+scale = -1
+angular_velocity = -100
 
 
 [editable path="player"]
-[editable path="barrel"]

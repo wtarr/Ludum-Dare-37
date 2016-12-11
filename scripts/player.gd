@@ -73,6 +73,10 @@ func _fixed_process(delta):
 	if (is_colliding()):
 		# You can check which tile was collision against with this
 		#var meta = get_collider_metadata()
+		var collider = get_collider().get_name()
+		
+		if collider == "barrel":
+			print("hit by barrel - todo logic here")
 		
 		# Ran against something, is it the floor? Get normal
 		var n = get_collision_normal()
@@ -117,4 +121,8 @@ func _ready():
 
 
 func _on_custom_collision_area_enter( area ):
+	pass # replace with function body
+
+
+func _on_Area2D_body_enter( body ):
 	pass # replace with function body

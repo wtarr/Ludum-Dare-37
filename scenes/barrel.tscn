@@ -1,28 +1,47 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=7 format=1]
 
-[ext_resource path="res://assets/barrell.png" type="Texture" id=1]
+[ext_resource path="res://scripts/barrel.gd" type="Script" id=1]
+[ext_resource path="res://assets/barrell.png" type="Texture" id=2]
+[ext_resource path="res://scenes/particle_exp.tscn" type="PackedScene" id=3]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=4]
 
 custom_solver_bias = 0.0
-radius = 8.27889
+radius = 7.43323
 
 [sub_resource type="CircleShape2D" id=2]
 
 custom_solver_bias = 0.0
 radius = 9.18936
 
+[sub_resource type="Animation" id=3]
+
+resource/name = "explode"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("particle_exp/Particles2D:config/emitting")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.1 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ true, false ] }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0.3 ), "transitions":FloatArray( 1 ), "values":[ { "args":[  ], "method":"anim_expired" } ] }
+
 [node name="barrel" type="RigidBody2D"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 1 )
+shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
 mode = 0
 mass = 1.0
-friction = 0.2
+friction = 1.0
 bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
@@ -33,12 +52,15 @@ sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
-damp_override/linear = 25.0
-damp_override/angular = 25.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+angular_velocity = 100
+linear_velocity = Vector2( 50, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 0
 
@@ -61,6 +83,26 @@ _update_shape_index = 0
 
 [node name="Sprite" type="Sprite" parent="."]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
+
+[node name="particle_exp" parent="." instance=ExtResource( 3 )]
+
+[node name="Particles2D" parent="particle_exp"]
+
+config/emit_timeout = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/explode = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[connection signal="body_enter" from="Area2D" to="." method="_on_Area2D_body_enter"]
 
 
+[editable path="particle_exp"]
