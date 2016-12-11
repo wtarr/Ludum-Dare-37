@@ -1,12 +1,14 @@
 extends KinematicBody2D
 
+var tileMap = null
+
 var gravity = 200.0
 
 var floor_angle_tolerence = 40 # within + or - of this constitutes being on the floor
 var walk_force = 90
 var walk_min_speed = 0.5
 var walk_max_speed = 5
-var stop_force = 200
+var stop_force = 150
 var jump_speed = 25
 
 var jump_max_airborne_time = 0.2
@@ -20,10 +22,8 @@ var jumping = false
 
 var prev_jump_pressed = false
 
-var slashAnim = preload("res://../scenes/slash.tscn")
-var slashAnimInstance
-
-var pendulum_class = preload("res://../scripts/pendulum_v2.gd")
+#var slashAnim = preload("res://../scenes/slash.tscn")
+#var slashAnimInstance
 
 func _fixed_process(delta):
 	
@@ -47,8 +47,8 @@ func _fixed_process(delta):
 			force.x -= walk_force
 			stop = false
 			
-	if (slash):
-		get_node("slash").get_node("AnimationPlayer").play("slash")
+	#if (slash):
+	#	get_node("slash").get_node("AnimationPlayer").play("slash")
 	
 	if (stop):
 		var vsign = sign(velocity.x) # - or + ?
@@ -72,11 +72,28 @@ func _fixed_process(delta):
 		
 	if (is_colliding()):
 		# You can check which tile was collision against with this
-		#var meta = get_collider_metadata()
-		var collider = get_collider().get_name()
+		#var meta = get_collider_metadata()	
 		
-		if collider == "barrel":
-			print("hit by barrel - todo logic here")
+		var collider = get_collider()
+		
+		var collider_meta = get_collider_metadata()
+		
+		var collider_pos = collider.get_pos()
+		
+		var collider_name = collider.get_name()
+		
+		#if collider == "TileMap":
+  		#	var pos = body.world_to_map(get_pos())
+  		#	var id = body.get_cell(pos.x,pos.y)
+  		#	var body_name = body.get_tileset().tile_get_name(id)
+		
+		if collider_name == "TileMap":
+			var tile = tileMap.get_cellv(get_collider_metadata())
+			if tile == 1:
+				_on_contact_with_spiked_tile()
+		
+		#if collider_name != "TileMap":
+		#	print("hit by " + collider_name + " - todo logic here")
 		
 		# Ran against something, is it the floor? Get normal
 		var n = get_collision_normal()
@@ -92,8 +109,6 @@ func _fixed_process(delta):
 			revert_motion()
 			velocity.y = 0.0
 		else:
-			# For every other case of motion, our motion was interrupted.
-			# Try to complete the motion by "sliding" by the normal
 			motion = n.slide(motion)
 			velocity = n.slide(velocity)
 			# Then move again
@@ -117,12 +132,14 @@ func _fixed_process(delta):
 func _ready():
 	#slashAnimInstance = slashAnim.instance()
 	#add_child(slashAnimInstance)
+	tileMap = get_tree().get_root().get_node("Root").get_node("TileMap")
 	set_fixed_process(true)
 
-
-func _on_custom_collision_area_enter( area ):
-	pass # replace with function body
-
-
-func _on_Area2D_body_enter( body ):
-	pass # replace with function body
+func _on_contact_with_spiked_enemy():
+	print("hit by an enemy - take action")
+	
+func _on_contact_with_barrel():
+	print("hit by barrel - take action - func")
+	
+func _on_contact_with_spiked_tile():
+	print("spike contact - action needed")

@@ -12,7 +12,7 @@ radius = 7.43323
 [sub_resource type="CircleShape2D" id=2]
 
 custom_solver_bias = 0.0
-radius = 9.18936
+radius = 11.4225
 
 [sub_resource type="Animation" id=3]
 
