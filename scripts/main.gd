@@ -11,3 +11,9 @@ func _ready():
 
 func _on_Area2D_body_enter_pendulum( body ):
 	print(body.get_name())
+	
+func _player_has_reached_exit():
+	print("exit reached")
+	get_tree().change_scene("res://scenes/end.tscn")
+	self.queue_free()
+	
