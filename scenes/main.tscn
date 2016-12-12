@@ -150,6 +150,7 @@ transform/pos = Vector2( 982.377, 15.9594 )
 
 [node name="player" parent="." instance=ExtResource( 6 )]
 
+transform/pos = Vector2( 80.3246, 1519.48 )
 
 [node name="pendulum_v2_a" parent="." instance=ExtResource( 7 )]
 
