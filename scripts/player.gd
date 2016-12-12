@@ -23,7 +23,7 @@ var jumping = false
 var prev_jump_pressed = false
 
 var latest_spawn_point = null
-var lives = 10
+# var lives = 10
 var revert_to_last_checkpoint = false
 
 var current_animation = ""
@@ -33,7 +33,7 @@ var current_direction = "right"
 func _fixed_process(delta):
 	var new_animation = current_animation
 	
-	get_node("Label").set_text("Lives: " + str(lives))
+	get_node("Label").set_text("Lives: " + str(global.lives))
 	
 	if revert_to_last_checkpoint:
 		revert_to_last_checkpoint = false
@@ -165,6 +165,8 @@ func _fixed_process(delta):
 func _ready():
 	#slashAnimInstance = slashAnim.instance()
 	#add_child(slashAnimInstance)
+	global.lives = 10
+	
 	latest_spawn_point = get_pos()	
 	tileMap = get_tree().get_root().get_node("Root").get_node("TileMap")
 	set_fixed_process(true)
@@ -193,4 +195,4 @@ func set_revert_to_checkpoint():
 	revert_to_last_checkpoint = true
 
 func deduct_life():
-	lives -= 1
+	global.lives -= 1

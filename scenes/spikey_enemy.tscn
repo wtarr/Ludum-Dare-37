@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 11.7166, 6.38199 )
+extents = Vector2( 13.6019, 7.50049 )
 
 [sub_resource type="Animation" id=2]
 
@@ -29,7 +29,7 @@ script/script = ExtResource( 1 )
 transform/pos = Vector2( 42.7227, 0 )
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.77684, 3.87857 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.964855, 3.00116 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -42,7 +42,7 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
 
-transform/pos = Vector2( 0.77684, 3.87857 )
+transform/pos = Vector2( 0.964855, 3.00116 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0

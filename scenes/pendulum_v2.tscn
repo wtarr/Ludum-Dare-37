@@ -15,11 +15,10 @@ tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = { "times":FloatArray( 0, 0.25, 0.5, 0.75 ), "transitions":FloatArray( 1, 1, 1, 1 ), "update":0, "values":[ 65.0, 0.0, -65.0, 0.0 ] }
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-radius = 16.822
-height = 20.0
+extents = Vector2( 17.2222, 29.856 )
 
 [node name="pendulum_v2" type="Node2D"]
 
@@ -48,7 +47,7 @@ transform/pos = Vector2( 0, 120 )
 transform/scale = Vector2( 0.506359, 0.189958 )
 input/pickable = true
 shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/transform = Matrix32( 1.83731, 0, 0, 1, -0.946011, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -57,6 +56,8 @@ angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
 
+transform/pos = Vector2( -0.946011, 0 )
+transform/scale = Vector2( 1.83731, 1 )
 shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0

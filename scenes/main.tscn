@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=1]
+[gd_scene load_steps=24 format=1]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ParallaxBackground.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/barrel_launch.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/spikey_enemy.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/spikey_enemy_r_l.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/ld37_something.ogg" type="AudioStream" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -149,7 +150,7 @@ transform/pos = Vector2( 982.377, 15.9594 )
 
 [node name="player" parent="." instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 66.8217, 1518.52 )
+transform/pos = Vector2( 840.516, 25.128 )
 
 [node name="pendulum_v2_a" parent="." instance=ExtResource( 7 )]
 
@@ -158,7 +159,7 @@ transform/pos = Vector2( 371.661, 308.308 )
 [node name="pendulum_v2_b" parent="." instance=ExtResource( 7 )]
 
 editor/display_folded = true
-transform/pos = Vector2( 418.312, 70.6758 )
+transform/pos = Vector2( 495.853, -15.028 )
 
 [node name="pendulum_v2_b1" parent="." instance=ExtResource( 7 )]
 
@@ -598,6 +599,17 @@ transform/pos = Vector2( 828.161, 1111.48 )
 [node name="spikey_enemy_l1_d_1" parent="." instance=ExtResource( 13 )]
 
 transform/pos = Vector2( 828.161, 39.1077 )
+
+[node name="StreamPlayer" type="StreamPlayer" parent="."]
+
+stream/stream = ExtResource( 14 )
+stream/play = false
+stream/loop = true
+stream/volume_db = 0.0
+stream/autoplay = true
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
 
 
 [editable path="player"]
