@@ -52,7 +52,7 @@ flat = false
 
 [node name="title" type="Sprite" parent="."]
 
-visibility/opacity = 0.732454
+visibility/opacity = 0.561535
 transform/pos = Vector2( 519.376, 174.179 )
 transform/scale = Vector2( 1.43922, 1.43922 )
 texture = ExtResource( 3 )
