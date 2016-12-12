@@ -6,7 +6,7 @@ extends Node2D
 var player = null
 
 func _ready():
-	player = get_tree().get_root().get_node("Root").get_node("player").get_node("player_kinematic")
+	player = get_tree().get_root().get_node("Root").get_node("player")
 	pass
 
 func _on_Area2D_body_enter( body ):

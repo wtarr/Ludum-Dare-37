@@ -23,15 +23,17 @@ var jumping = false
 var prev_jump_pressed = false
 
 var latest_spawn_point = null
-
+var lives = 10
 var revert_to_last_checkpoint = false
 #var slashAnim = preload("res://../scenes/slash.tscn")
 #var slashAnimInstance
 
 func _fixed_process(delta):
+	get_node("Label").set_text("Lives: " + str(lives))
 	
 	if revert_to_last_checkpoint:
 		revert_to_last_checkpoint = false
+		deduct_life()
 		#revert_motion()
 		#move_to(latest_spawn_point)
 		set_pos(latest_spawn_point)
@@ -148,18 +150,26 @@ func _ready():
 
 func _on_contact_with_spiked_enemy():
 	print("hit by an enemy - take action")
+	set_revert_to_checkpoint()
 	
 func _on_contact_with_barrel():
 	print("hit by barrel - take action - func")
-	revert_to_last_checkpoint = true
+	set_revert_to_checkpoint()
 	
 func _on_contact_with_spiked_tile():
 	print("spike contact - action needed")
-	revert_to_last_checkpoint = true
+	set_revert_to_checkpoint()
 
 func _on_pendulum_collision():
 	print("pendulum contact - action needed")
+	set_revert_to_checkpoint()
 
 func _on_contact_with_checkpoint(spawn_pt):
 	print("checkpoint reached")
 	latest_spawn_point = spawn_pt
+
+func set_revert_to_checkpoint():
+	revert_to_last_checkpoint = true
+
+func deduct_life():
+	lives -= 1

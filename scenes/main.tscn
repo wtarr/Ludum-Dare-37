@@ -133,7 +133,7 @@ __meta__ = { "_edit_lock_":true }
 
 [node name="player" parent="." instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 48.8439, 1515.98 )
+transform/pos = Vector2( 53.2231, 1504.93 )
 
 [node name="pendulum_v2_a" parent="." instance=ExtResource( 5 )]
 
