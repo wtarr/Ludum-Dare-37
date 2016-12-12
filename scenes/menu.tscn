@@ -43,6 +43,7 @@ margin/left = 468.0
 margin/top = 283.0
 margin/right = 575.0
 margin/bottom = 368.0
+custom_colors/font_color = Color( 0.239216, 0.854902, 0.321569, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -51,7 +52,7 @@ flat = false
 
 [node name="title" type="Sprite" parent="."]
 
-visibility/opacity = 0.902067
+visibility/opacity = 0.732454
 transform/pos = Vector2( 519.376, 174.179 )
 transform/scale = Vector2( 1.43922, 1.43922 )
 texture = ExtResource( 3 )
@@ -66,6 +67,22 @@ playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = "fading"
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 751.0
+margin/top = 581.0
+margin/right = 1020.0
+margin/bottom = 595.0
+custom_colors/font_color = Color( 0.239216, 0.854902, 0.321569, 1 )
+text = "A game by CoderDozer for Ludum Dare 37"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [connection signal="pressed" from="button" to="." method="_on_button_pressed"]
 

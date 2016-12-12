@@ -43,22 +43,6 @@ flat = false
 transform/pos = Vector2( 529.784, 192.281 )
 texture = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="."]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 747.0
-margin/top = 573.0
-margin/right = 1013.0
-margin/bottom = 587.0
-custom_colors/font_color = Color( 0.377655, 0.976563, 0.40105, 1 )
-text = "A game by CoderDozer for Ludum Dare 37"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
 [node name="time_to_beat" type="Label" parent="."]
 
 focus/ignore_mouse = true
