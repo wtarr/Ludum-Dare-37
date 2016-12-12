@@ -2,14 +2,14 @@ extends KinematicBody2D
 
 var tileMap = null
 
-var gravity = 200.0
+var gravity = 180.0
 
 var floor_angle_tolerence = 40 # within + or - of this constitutes being on the floor
 var walk_force = 90
 var walk_min_speed = 0.5
-var walk_max_speed = 5
-var stop_force = 150
-var jump_speed = 25
+var walk_max_speed = 6
+var stop_force = 140
+var jump_speed = 26
 
 var jump_max_airborne_time = 0.2
 
@@ -25,10 +25,14 @@ var prev_jump_pressed = false
 var latest_spawn_point = null
 var lives = 10
 var revert_to_last_checkpoint = false
-#var slashAnim = preload("res://../scenes/slash.tscn")
-#var slashAnimInstance
+
+var current_animation = ""
+
+var current_direction = "right"
 
 func _fixed_process(delta):
+	var new_animation = current_animation
+	
 	get_node("Label").set_text("Lives: " + str(lives))
 	
 	if revert_to_last_checkpoint:
@@ -52,17 +56,19 @@ func _fixed_process(delta):
 	# if walking left or right, check that velocity limit has not been exceeded
 	if (walk_right):
 		if (velocity.x >= -walk_min_speed and velocity.x < walk_max_speed):
+			current_direction = "right"
 			force.x += walk_force
 			stop = false
 	elif (walk_left):
 		if (velocity.x <= walk_min_speed and velocity.x > -walk_max_speed):
+			current_direction = "left"
 			force.x -= walk_force
 			stop = false
 			
 	#if (slash):
 	#	get_node("slash").get_node("AnimationPlayer").play("slash")
 	
-	if (stop):
+	if (stop and not jumping):
 		var vsign = sign(velocity.x) # - or + ?
 		var vlen = abs(velocity.x) # magnitude
 		
@@ -140,11 +146,26 @@ func _fixed_process(delta):
 	
 	on_air_time += delta
 	prev_jump_pressed = jump
+	
+	# animation and sprite direction
+	if (velocity.x != 0):
+		new_animation = "walk"
+	else:
+		new_animation = "idle"
+		
+	if new_animation != current_animation:
+		current_animation = new_animation
+		get_node("animation_player").play(current_animation)
+	
+	if (current_direction == "left"):
+		get_node("Sprite").set_scale(Vector2(-1, 1))
+	else:
+		get_node("Sprite").set_scale(Vector2(1, 1))
 
 func _ready():
 	#slashAnimInstance = slashAnim.instance()
 	#add_child(slashAnimInstance)
-	latest_spawn_point = get_pos()
+	latest_spawn_point = get_pos()	
 	tileMap = get_tree().get_root().get_node("Root").get_node("TileMap")
 	set_fixed_process(true)
 
