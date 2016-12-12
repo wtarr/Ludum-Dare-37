@@ -22,10 +22,20 @@ var jumping = false
 
 var prev_jump_pressed = false
 
+var latest_spawn_point = null
+
+var revert_to_last_checkpoint = false
 #var slashAnim = preload("res://../scenes/slash.tscn")
 #var slashAnimInstance
 
 func _fixed_process(delta):
+	
+	if revert_to_last_checkpoint:
+		revert_to_last_checkpoint = false
+		#revert_motion()
+		#move_to(latest_spawn_point)
+		set_pos(latest_spawn_point)
+		return
 	
 	var force = Vector2(0, gravity)
 	
@@ -132,6 +142,7 @@ func _fixed_process(delta):
 func _ready():
 	#slashAnimInstance = slashAnim.instance()
 	#add_child(slashAnimInstance)
+	latest_spawn_point = get_pos()
 	tileMap = get_tree().get_root().get_node("Root").get_node("TileMap")
 	set_fixed_process(true)
 
@@ -140,6 +151,15 @@ func _on_contact_with_spiked_enemy():
 	
 func _on_contact_with_barrel():
 	print("hit by barrel - take action - func")
+	revert_to_last_checkpoint = true
 	
 func _on_contact_with_spiked_tile():
 	print("spike contact - action needed")
+	revert_to_last_checkpoint = true
+
+func _on_pendulum_collision():
+	print("pendulum contact - action needed")
+
+func _on_contact_with_checkpoint(spawn_pt):
+	print("checkpoint reached")
+	latest_spawn_point = spawn_pt

@@ -6,15 +6,13 @@ extends RigidBody2D
 export var angular_velocity = 100
 export var linear_velocity = Vector2(50, 0)
 
-
-var root = null
 var player = null
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	#set_fixed_process(true)
-	player = get_tree().get_root().get_node("Root").get_node("player").get_node("player_kinematic")	
+	player = get_tree().get_root().get_node("Root").get_node("player")	
 	set_angular_velocity(angular_velocity)
 	set_linear_velocity(linear_velocity)
 	set_gravity_scale(2)
